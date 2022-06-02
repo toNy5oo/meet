@@ -1,0 +1,44 @@
+.squares {
+    padding: 0;
+    margin: 0;
+}
+
+.top-left {
+    border: 1px solid red;
+    height: 50vh;
+    width: 50vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2rem;
+}
+
+.top-right {
+    border: 1px solid blue;
+    height: 50vh;
+    width: 50vw;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    padding: 2rem;
+}
+
+.bot-left {
+    border: 1px solid green;
+    height: 50vh;
+    width: 50vw;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    padding: 2rem;
+}
+
+.bot-right {
+    border: 1px solid yellow;
+    height: 50vh;
+    width: 50vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 2rem;
+}
