@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {Col, Button, Card} from 'react-bootstrap'
+import { SiGooglemaps } from 'react-icons/si'
+import { GrStatusInfo } from 'react-icons/gr'
 
 class Event extends Component {
 
@@ -18,21 +21,26 @@ class Event extends Component {
     const {showDetails} = this.state;
 
     return (
-      <div className='event'>
-          <h2 className='summary'>{event.summary}</h2>
-          <h4 className='start-date'>{event.start.dateTime} ({event.start.timeZone})</h4>
-          <h4 className='location'>@{event.summary} | {event.location}</h4>
-          <button className='btn_details' onClick={this.isClicked}>{showDetails ? 'Hide Details' : 'Show Details '}</button>
+    
+      <Card className='event text-center'>
+          <Card.Header as="h5" className="summary">{event.summary}</Card.Header>
+          <Card.Body>
+          <Card.Title className='start-date'>{event.start.dateTime} ({event.start.timeZone})</Card.Title>
+          <Card.Text className='location'><GrStatusInfo /> {event.status} | <SiGooglemaps /> {event.location}</Card.Text>
+          <Button variant="secondary" className='btn_details' onClick={this.isClicked}>{showDetails ? 'Hide Details' : 'Show Details '}</Button>
         {showDetails && 
         (<div className='extra-info'>
-            <h3>About the event:</h3>
+            <h5>About the event:</h5>
             <a href={event.htmlLink} rel="noreferrer" target='_blank'>
               See details on Google Calendar
             </a>
             <p className='description'>{event.description}</p>
           </div>
         )}
-      </div>
+      
+      </Card.Body>
+      </Card>
+      
     )
   }
 }

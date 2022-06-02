@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Col } from 'react-bootstrap/'
 
 class CitySearch extends Component {
   state = {
@@ -28,7 +29,8 @@ class CitySearch extends Component {
   
   render() {
     return (
-      <div className="CitySearch">Choose a city to see the events having place there:&nbsp;
+      <Col md={5} className="d-flex justify-content-around">
+      <div className="CitySearch">Choose a city to see the events having place there:</div>
         <input
           type="text"
           className="city"
@@ -47,7 +49,7 @@ class CitySearch extends Component {
               <b>See all cities</b>
             </li>
         </ul>
-      </div>
+      </Col>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Col } from 'react-bootstrap/'
 
 
 class NumberOfEvents extends Component {
@@ -16,15 +17,15 @@ class NumberOfEvents extends Component {
 
   render() {
     return (
-      <div className="numberOfEvents">Events to show:
+      <Col md={4} className="d-flex justify-content-center">
+      <div className="numberOfEvents">Events to show:</div>
       <input 
             className="events_number__input" 
             type="number" 
             onChange={this.handleChange}
             value={this.state.numberOfEvents}>
         </input>
-        </div>
-      
+      </Col> 
     );
   }
 }

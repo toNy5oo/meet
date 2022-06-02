@@ -5,7 +5,8 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 import './nprogress.css';
-import { Container, Row, Col, Card } from 'react-bootstrap/'
+import { Container, Row, Col } from 'react-bootstrap/'
+import Header from './Header';
 
 
 class App extends Component {
@@ -61,34 +62,21 @@ class App extends Component {
 
     render() {
 
-        return ( <
-            div className = "App" >
-            <
-            Container fluid >
-            <
-            Row md = { 10 } >
-            <
-            Col className = "d-flex justify-content-between" >
-            <
-            CitySearch locations = { this.state.locations }
-            updateEvents = { this.updateEvents }
-            />  <
-            NumberOfEvents numberOfEvents = { this.state.numberOfEvents }
-            setNumberOfEvents = { this.setNumberOfEvents }
-            />  <
-            /Col> <
-            /Row> <
-            Row md = { 10 } >
-            <
-            Col md = { 3 }
-            className = "d-flex justify-content-center" >
-            <
-            EventList events = { this.state.events }
-            /> <
-            /Col> <
-            /Row> <
-            /Container>   <
-            /div>
+        return ( 
+            <div className = "App" >
+                <Header />
+                <Container fluid >
+                        <Row md={6} className="justify-content-center">
+                            
+                                <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } />
+                            
+                            
+                                <NumberOfEvents numberOfEvents = { this.state.numberOfEvents } setNumberOfEvents = { this.setNumberOfEvents }/>
+                                
+                        </Row>       
+                        <EventList events = { this.state.events } />
+                </Container>
+            </div>
         );
     }
 }
