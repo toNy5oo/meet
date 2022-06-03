@@ -7,10 +7,10 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //React 17
-// const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 //React 18
-const rootElement = document.getElementById("root");
-const root = createRoot(rootElement);
+// const rootElement = document.getElementById("root");
+// const root = createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
