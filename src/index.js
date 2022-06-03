@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createRoot} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -6,13 +6,18 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+//React 17
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+//React 18
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
         <App />
   </React.StrictMode>
 );
+
 
 
 

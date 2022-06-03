@@ -18,13 +18,3 @@ class EventList extends Component {
 }
 
 export default EventList;
-
-
-
-// <ul className="Eventlist">
-//         {events.map((event) => (
-//           <li key={event.id}>
-//             <Event event={event} />
-//           </li>
-//         ))}
-//       </ul>

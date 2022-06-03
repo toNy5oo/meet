@@ -62,6 +62,12 @@ describe('<Event /> component', () => {
                     expect(EventWrapper.state('showDetails')).toBeTruthy()
                 })
 
-
+                test('change state when function isClicked is called', () => {
+                    EventWrapper.setState({
+                        showDetails: false,
+                    });
+                    EventWrapper.instance().isClicked();
+                    expect(EventWrapper.state('showDetails')).toBeTruthy()
+                })
 
             })

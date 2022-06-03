@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import {Col, Button, Card} from 'react-bootstrap'
+import { Button, Card} from 'react-bootstrap'
 import { SiGooglemaps } from 'react-icons/si'
 import { GrStatusInfo } from 'react-icons/gr'
 
 class Event extends Component {
 
-  state = {
-    showDetails: false,
-  };
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      showDetails: false,
+    };
+  }
+ 
   isClicked = () => {
     this.setState({
       showDetails: !this.state.showDetails,

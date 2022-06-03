@@ -5,7 +5,7 @@ import NumberOfEvents from '../NumberOfEvents';
 describe('<NumberOfEvents /> component', () => {
     let NOEventsWrapper;
     beforeAll(() => {
-        NOEventsWrapper = shallow( < NumberOfEvents / > );
+        NOEventsWrapper = shallow(<NumberOfEvents /> );
     });
 
     //Renders correctly the input field
@@ -25,4 +25,12 @@ describe('<NumberOfEvents /> component', () => {
         NOEventsWrapper.find('.events_number__input').simulate('change', { target: { value: 8 } });
         expect(NOEventsWrapper.state('numberOfEvents')).toEqual(8);
     });
+
+    // test.only('Change number of events', () => {
+    //     const numberEvents = NOEventsWrapper.state('numberOfEvents')
+    //     console.log('Number Of Events', numberEvents)
+    //     NOEventsWrapper.instance().handleChange().simulate('change', { target: { value: 10 } });
+    //     expect(NOEventsWrapper.state(`numberOfEvents`)).not.toEqual(numberEvents);
+    //   });
+
 })

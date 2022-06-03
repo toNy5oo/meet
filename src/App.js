@@ -5,30 +5,34 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 import './nprogress.css';
-import { Container, Row, Col } from 'react-bootstrap/'
+import { Container, Row } from 'react-bootstrap/'
 import Header from './Header';
 
 
 class App extends Component {
-    state = {
-        events: [],
-        locations: [],
-        locationSelected: 'all',
-        numberOfEvents: 12
-    };
-
+    
+    constructor(props){
+        super(props)
+            this.state = {
+                events: [],
+                locations: [],
+                locationSelected: 'all',
+                numberOfEvents: 12
+            };
+    }
+    
     componentDidMount() {
         this.mounted = true;
-        getEvents().then((events) => {
-            if (this.mounted) {
+        
+            
                 getEvents().then((events) => {
                     this.setState({
                         locations: extractLocations(events),
                         events: events
                     });
                 });
-            }
-        });
+            
+       
     }
     componentWillUnmount() {
         this.mounted = false;
@@ -53,11 +57,11 @@ class App extends Component {
         })
     }
 
-    setNumberOfEvents = (numberOfEvents) => {
+    setNumberOfEvents(value) {
         this.setState({
-            numberOfEvents,
+            numberOfEvents: value
         });
-        this.updateEvents(undefined, numberOfEvents);
+        this.updateEvents(undefined, this.state.numberOfEvents);
     };
 
     render() {
@@ -67,12 +71,8 @@ class App extends Component {
                 <Header />
                 <Container fluid >
                         <Row md={6} className="justify-content-center">
-                            
                                 <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } />
-                            
-                            
                                 <NumberOfEvents numberOfEvents = { this.state.numberOfEvents } setNumberOfEvents = { this.setNumberOfEvents }/>
-                                
                         </Row>       
                         <EventList events = { this.state.events } />
                 </Container>
