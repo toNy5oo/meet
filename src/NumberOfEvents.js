@@ -3,23 +3,26 @@ import { Col } from 'react-bootstrap/'
 
 
 class NumberOfEvents extends Component {
-    
-    constructor(props){
-      super(props);
-        this.state = {
-        numberOfEvents: 12,
-      }
-    }
-    
-    handleChange = (event) => {
-      if (event !== undefined){
-        let numOfEvents = parseInt(event.target.value)
+     
+    // handleChange = (event) => {
+    //   let numOfEvents = parseInt(event.target.value)
+    //   this.setState({
+    //       numberOfEvents: numOfEvents
+    //     });
+    //     this.props.setNumberOfEvents(numOfEvents);
+    //   } 
+
+  state = { 
+    numberOfEvents : 12
+  }
+
+  changeNumOfEvents = (e) => {
+    let newValue = parseInt(e.target.value);
         this.setState({
-            numberOfEvents: numOfEvents
-          });
-          return () => this.props.setNumberOfEvents(numOfEvents);
-        } 
-      }
+            numberOfEvents: newValue
+        });
+        this.props.updateEvents(undefined, newValue);
+  }
 
   render() {
     return (
@@ -28,7 +31,7 @@ class NumberOfEvents extends Component {
       <input 
             className="events_number__input" 
             type="number" 
-            onChange={this.handleChange}
+            onChange={this.changeNumOfEvents}
             value={this.state.numberOfEvents}>
         </input>
       </Col> 

@@ -10,41 +10,39 @@ import Header from './Header';
 
 
 class App extends Component {
-    
-    constructor(props){
-        super(props)
-            this.state = {
-                events: [],
-                locations: [],
-                locationSelected: 'all',
-                numberOfEvents: 12
-            };
-    }
-    
+
+    state = {
+        events: [],
+        locations: [],
+        locationSelected: 'all',
+        numberOfEvents: 12
+    };
+
     componentDidMount() {
         this.mounted = true;
-        
-            
-                getEvents().then((events) => {
-                    this.setState({
-                        locations: extractLocations(events),
-                        events: events
-                    });
-                });
-            
-       
+        getEvents().then((events) => {
+            this.setState({
+                locations: extractLocations(events),
+                events: events
+            });
+        });
     }
+
     componentWillUnmount() {
         this.mounted = false;
     }
 
+    
     updateEvents = (location, eventCount) => {
         if (eventCount === undefined) {
             eventCount = this.state.numberOfEvents;
-        }
+        } else(
+            this.setState({ numberOfEvents: eventCount })
+        )
         if (location === undefined) {
             location = this.state.locationSelected;
         }
+        console.log(eventCount, location)
         getEvents().then((events) => {
             let locationEvents = location === "all" ?
                 events :
@@ -57,25 +55,17 @@ class App extends Component {
         })
     }
 
-    setNumberOfEvents(value) {
-        this.setState({
-            numberOfEvents: value
-        });
-        this.updateEvents(undefined, this.state.numberOfEvents);
-    };
-
     render() {
 
         return ( 
             <div className = "App" >
-                <Header />
-                <Container fluid >
-                        <Row md={6} className="justify-content-center">
-                                <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } />
-                                <NumberOfEvents numberOfEvents = { this.state.numberOfEvents } setNumberOfEvents = { this.setNumberOfEvents }/>
-                        </Row>       
-                        <EventList events = { this.state.events } />
-                </Container>
+            <Header / >
+            <Container fluid >
+            <Row md = { 6 } className = "justify-content-center" >
+                <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } /> <NumberOfEvents updateEvents = { this.updateEvents } /> 
+            </Row> 
+            <EventList events = { this.state.events } /> 
+            </Container > 
             </div>
         );
     }
