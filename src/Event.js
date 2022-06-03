@@ -24,15 +24,15 @@ class Event extends Component {
     const {showDetails} = this.state;
 
     return (
-    
-      <Card className='event text-center'>
+      <div className='event'>
+      <Card className='text-center'>
           <Card.Header as="h5" className="summary">{event.summary}</Card.Header>
           <Card.Body>
           <Card.Title className='start-date'>{event.start.dateTime} ({event.start.timeZone})</Card.Title>
           <Card.Text className='location'><GrStatusInfo /> {event.status} | <SiGooglemaps /> {event.location}</Card.Text>
-          <Button variant="secondary" className='btn_details' onClick={this.isClicked}>{showDetails ? 'Hide Details' : 'Show Details '}</Button>
+          <Button variant="secondary" className='details-button' onClick={this.isClicked}>{showDetails ? 'Hide Details' : 'Show Details '}</Button>
         {showDetails && 
-        (<div className='extra-info'>
+        (<div className='extra-details'>
             <h5>About the event:</h5>
             <a href={event.htmlLink} rel="noreferrer" target='_blank'>
               See details on Google Calendar
@@ -43,6 +43,7 @@ class Event extends Component {
       
       </Card.Body>
       </Card>
+      </div>
       
     )
   }

@@ -42,15 +42,15 @@ describe('<Event /> component', () => {
                     EventWrapper.setState({
                         showDetails: false,
                     });
-                    EventWrapper.find('.btn_details').simulate('click');
-                    expect(EventWrapper.find('.extra-info')).toHaveLength(1);
+                    EventWrapper.find('.details-button').simulate('click');
+                    expect(EventWrapper.find('.extra-details')).toHaveLength(1);
                 })
 
                 test('open extra details if button is clicked', () => {
                     EventWrapper.setState({
                         showDetails: true,
                     });
-                    EventWrapper.find('.btn_details').simulate('click');
+                    EventWrapper.find('.details-button').simulate('click');
                     expect(EventWrapper.state('showDetails')).toBeFalsy();
                 })
 
@@ -58,7 +58,7 @@ describe('<Event /> component', () => {
                     EventWrapper.setState({
                         showDetails: false,
                     });
-                    EventWrapper.find('.btn_details').simulate('click');
+                    EventWrapper.find('.details-button').simulate('click');
                     expect(EventWrapper.state('showDetails')).toBeTruthy()
                 })
 
