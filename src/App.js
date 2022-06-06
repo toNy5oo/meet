@@ -5,7 +5,7 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 import './nprogress.css';
-import { Container, Row } from 'react-bootstrap/'
+import { Container, Row, Col } from 'react-bootstrap/'
 import Header from './Header';
 
 
@@ -58,10 +58,10 @@ class App extends Component {
     render() {
 
         return ( 
-            <div className = "App" >
+            <div className = "App">
             <Header / >
             <Container fluid >
-            <Row md = { 6 } className = "justify-content-center" >
+            <Row className="d-flex justify-content-between">
                 <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } /> <NumberOfEvents updateEvents = { this.updateEvents } /> 
             </Row> 
             <EventList events = { this.state.events } /> 
