@@ -70,7 +70,7 @@ class App extends Component {
         
         return ( 
             <div className = "App">
-            {navigator.onLine && <OfflineAlert text={'You are currently offline, data may be not updated.'} />}
+            {!navigator.onLine && <OfflineAlert text={'You are currently offline, data may be not updated.'} />}
             <Header / >
             <Container>
             <Row className="d-flex justify-content-between p-3 m-3">
