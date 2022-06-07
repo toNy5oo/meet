@@ -9,6 +9,7 @@ class Alert extends Component {
   getStyle = () => {
     return {
       color: this.color,
+      display: 'block'
     };
   }
 
@@ -34,6 +35,5 @@ class InfoAlert extends Alert {
       this.color = 'red';
     }
   }
-
 
   export { InfoAlert, ErrorAlert };

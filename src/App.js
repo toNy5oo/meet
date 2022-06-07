@@ -60,7 +60,7 @@ class App extends Component {
         return ( 
             <div className = "App">
             <Header / >
-            <Container fluid >
+            <Container>
             <Row className="d-flex justify-content-between">
                 <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } /> <NumberOfEvents updateEvents = { this.updateEvents } /> 
             </Row> 

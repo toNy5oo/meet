@@ -18,7 +18,7 @@ class NumberOfEvents extends Component {
     } else {
       this.setState({
         numberOfEvents: newValue,
-        infoText: '',
+        infoText: ' ',
       })
     }
         this.props.updateEvents(undefined, newValue);
