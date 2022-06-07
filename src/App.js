@@ -19,7 +19,7 @@ class App extends Component {
         numberOfEvents: 12,
         showWelcomeScreen: undefined
     };
-
+    
     async componentDidMount() {
             this.mounted = true;
             const accessToken = localStorage.getItem('access_token');
@@ -65,20 +65,18 @@ class App extends Component {
     }
 
      render() {
-        if (this.state.showWelcomeScreen === undefined) return <div
-        className="App" />
+        //if (this.state.showWelcomeScreen === undefined) return <div className="App" />
         
         return ( 
             <div className = "App">
-            {!navigator.onLine && <OfflineAlert text={'You are currently offline, data may be not updated.'} />}
+            {!navigator.onLine && <OfflineAlert text={'You are currently offline, data may be not updated.'}/>}
             <Header / >
             <Container>
             <Row className="d-flex justify-content-between p-3 m-3">
                 <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } /> <NumberOfEvents updateEvents = { this.updateEvents } /> 
             </Row> 
             <EventList events = { this.state.events } /> 
-            <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
-getAccessToken={() => { getAccessToken() }} />
+            {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
 
             </Container > 
             </div>

@@ -8,7 +8,7 @@ class EventList extends Component {
     return (
       <Row className="Eventlist d-flex">
         {events.map((event) => (
-          <Col md={3} key={event.id}>
+          <Col lg={3} md={4} sm={6} key={event.id}>
             <Event event={event} />
           </Col>
         ))}
