@@ -42,7 +42,7 @@ class CitySearch extends Component {
       <>
       <Col>
       {/* <div className="CitySearch">Choose a city to see the events having place there:</div> */}
-      <InfoAlert text={this.state.infoText} />
+      
       <InputGroup className="mb-3">
         <InputGroup.Text id="basic-addon1">Events that have place in</InputGroup.Text>
         <FormControl
@@ -56,6 +56,7 @@ class CitySearch extends Component {
                 onFocus={() => { this.setState({ showSuggestions: true }) }}
         />
       </InputGroup>
+      <InfoAlert text={this.state.infoText} />
         {/* <input
           type="text"
           className="city"

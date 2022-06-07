@@ -3,11 +3,12 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
-import { getEvents, extractLocations } from './api';
 import './nprogress.css';
-import { Container, Row, Col } from 'react-bootstrap/'
+import { Container, Row } from 'react-bootstrap/'
 import Header from './Header';
-
+import { OfflineAlert } from './Alert';
+import WelcomeScreen from './WelcomeScreen';
+import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 
 class App extends Component {
 
@@ -15,19 +16,27 @@ class App extends Component {
         events: [],
         locations: [],
         locationSelected: 'all',
-        numberOfEvents: 12
+        numberOfEvents: 12,
+        showWelcomeScreen: undefined
     };
 
-    componentDidMount() {
-        this.mounted = true;
-        getEvents().then((events) => {
-            this.setState({
-                locations: extractLocations(events),
-                events: events
-            });
-        });
-    }
-
+    async componentDidMount() {
+            this.mounted = true;
+            const accessToken = localStorage.getItem('access_token');
+            const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+            const searchParams = new URLSearchParams(window.location.search);
+            const code = searchParams.get("code");
+            this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+                if ((code || isTokenValid) && this.mounted) {
+                        getEvents().then((events) => {
+                            if (this.mounted) {
+                            this.setState({ events, locations: extractLocations(events) });
+                        }
+                        });
+                }
+                
+            }
+        
     componentWillUnmount() {
         this.mounted = false;
     }
@@ -55,16 +64,22 @@ class App extends Component {
         })
     }
 
-    render() {
-
+     render() {
+        if (this.state.showWelcomeScreen === undefined) return <div
+        className="App" />
+        
         return ( 
             <div className = "App">
+            {navigator.onLine && <OfflineAlert text={'You are currently offline, data may be not updated.'} />}
             <Header / >
             <Container>
-            <Row className="d-flex justify-content-between">
+            <Row className="d-flex justify-content-between p-3 m-3">
                 <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } /> <NumberOfEvents updateEvents = { this.updateEvents } /> 
             </Row> 
             <EventList events = { this.state.events } /> 
+            <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
+getAccessToken={() => { getAccessToken() }} />
+
             </Container > 
             </div>
         );

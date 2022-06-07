@@ -3,7 +3,7 @@ import { InputGroup, FormControl, Col } from 'react-bootstrap/'
 import { ErrorAlert } from './Alert';
 
 class NumberOfEvents extends Component {
-     
+
   state = { 
     numberOfEvents : 12
   }
@@ -29,7 +29,6 @@ class NumberOfEvents extends Component {
       <>
       <Col>
       {/* <div className="numberOfEvents">Events to show:</div> */}
-      <ErrorAlert text={this.state.infoText} />
       <InputGroup className="mb-3">
         <InputGroup.Text id="basic-addon1">Number of events to show</InputGroup.Text>
         <FormControl
@@ -42,6 +41,7 @@ class NumberOfEvents extends Component {
             value={this.state.numberOfEvents}
         />
       </InputGroup>
+      <ErrorAlert text={this.state.infoText} />
       {/* <input 
             className="events_number__input" 
             type="number" 
