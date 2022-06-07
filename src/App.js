@@ -65,7 +65,7 @@ class App extends Component {
     }
 
      render() {
-        //if (this.state.showWelcomeScreen === undefined) return <div className="App" />
+        if (this.state.showWelcomeScreen === undefined) return <div className="App" />
         
         return ( 
             <div className = "App">
@@ -76,7 +76,7 @@ class App extends Component {
                 <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } /> <NumberOfEvents updateEvents = { this.updateEvents } /> 
             </Row> 
             <EventList events = { this.state.events } /> 
-            {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
+            <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
 
             </Container > 
             </div>
