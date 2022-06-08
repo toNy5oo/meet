@@ -11,7 +11,7 @@ import WelcomeScreen from './WelcomeScreen';
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import { EventGenre } from './EventGenre';
 import {
-    ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Sector, Cell
+    ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
   } from 'recharts';
 
 class App extends Component {
@@ -66,7 +66,6 @@ class App extends Component {
         if (location === undefined) {
             location = this.state.locationSelected;
         }
-        // console.log(eventCount, location)
         getEvents().then((events) => {
             let locationEvents = location === "Everywhere" ?
                 events :
@@ -86,7 +85,6 @@ class App extends Component {
           const city = location.split(', ').shift()
           return {city, number};
         })
-        console.log(data);
         return data;
       };
 
