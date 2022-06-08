@@ -24,33 +24,33 @@ class App extends Component {
         showWelcomeScreen: undefined
     };
     
-    // async componentDidMount() {
-    //         this.mounted = true;
-    //         const accessToken = localStorage.getItem('access_token');
-    //         const isTokenValid = (await checkToken(accessToken)).error ? false : true;
-    //         const searchParams = new URLSearchParams(window.location.search);
-    //         const code = searchParams.get("code");
-    //         this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-    //             if ((code || isTokenValid) && this.mounted) {
-    //                     getEvents().then((events) => {
-    //                         if (this.mounted) {
-    //                         this.setState({ events, locations: extractLocations(events) });
-    //                     }
-    //                     });
-    //             }
+    async componentDidMount() {
+            this.mounted = true;
+            const accessToken = localStorage.getItem('access_token');
+            const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+            const searchParams = new URLSearchParams(window.location.search);
+            const code = searchParams.get("code");
+            this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+                if ((code || isTokenValid) && this.mounted) {
+                        getEvents().then((events) => {
+                            if (this.mounted) {
+                            this.setState({ events, locations: extractLocations(events) });
+                        }
+                        });
+                }
                 
-    //         }
+            }
 
-    componentDidMount() {
-        this.mounted = true;  
-                getEvents().then((events) => {
-                    this.setState({
-                        locations: extractLocations(events),
-                        events: events
-                    });
-                }); 
+    // componentDidMount() {
+    //     this.mounted = true;  
+    //             getEvents().then((events) => {
+    //                 this.setState({
+    //                     locations: extractLocations(events),
+    //                     events: events
+    //                 });
+    //             }); 
                 
-    }
+    // }
         
     componentWillUnmount() {
         this.mounted = false;
@@ -93,7 +93,7 @@ class App extends Component {
       
 
      render() {
-        // if (this.state.showWelcomeScreen === undefined) return <div className="App" />
+         if (this.state.showWelcomeScreen === undefined) return <div className="App" />
         
         return ( 
             <div className = "App">
@@ -101,15 +101,15 @@ class App extends Component {
             <Header / >
             <Container>
                     <Row className="d-flex justify-content-center align-item-center p-3 m-3">
-                            <Col md={12} className="d-flex flex-column align-items-center justify-content-center p-5">
+                            <Col md={6} className="d-flex flex-column align-items-center justify-content-center p-5">
                                     <NumberOfEvents updateEvents = { this.updateEvents } />
                                     <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } />  
                             </Col>
                             <Col md={6} className='data-vis-wrapper'>
                                     <EventGenre events={this.state.events} />
                             </Col>
-                            <Col  md={6} className="data-vis-wrapper d-flex flex-column align-items-center justify-content-around p-5">
-                                    <ResponsiveContainer height={200} >
+                            <Col  md={12} className="data-vis-wrapper d-flex flex-column align-items-center justify-content-around p-5">
+                                    <ResponsiveContainer height={250} >
                                         <ScatterChart
                                                 margin={{
                                                     top: 20, right: 20, bottom: 20, left: 20,
@@ -129,7 +129,7 @@ class App extends Component {
                     
                     </Row>
             <EventList events = { this.state.events } /> 
-            {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
+            <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
             </Container > 
             </div>
         );
