@@ -105,10 +105,11 @@ class App extends Component {
                                     <NumberOfEvents updateEvents = { this.updateEvents } />
                                     <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } />  
                             </Col>
-                            <Col md={6} className='data-vis-wrapper'>
+                            <Col md={6} className='data-vis-wrapper d-flex flex-column'>
                                     <EventGenre events={this.state.events} />
                             </Col>
-                            <Col  md={12} className="data-vis-wrapper d-flex flex-column align-items-center justify-content-around p-5">
+                            <Col  md={12} className="d-flex flex-column align-items-center justify-content-around p-5">
+                                    <h6 className="text-muted">Distribution of event amounts by city</h6>
                                     <ResponsiveContainer height={250} >
                                         <ScatterChart
                                                 margin={{

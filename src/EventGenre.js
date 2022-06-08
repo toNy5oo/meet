@@ -19,12 +19,14 @@ export const EventGenre = ({ events }) => {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF66B2'  ];
 
   return (
-    <ResponsiveContainer height={400}>
+    <>
+    <h6 className="text-muted">Distribution of event type</h6>
+    <ResponsiveContainer height={300}>
       <PieChart width={400} height={400}>
         <Pie
           data={data}
-          cx={200}
-          cy={200}
+          cx="50%"
+          cy="50%"
           labelLine={false}
           outerRadius={80}
           fill='rgb(4, 67, 137)'
@@ -36,6 +38,7 @@ export const EventGenre = ({ events }) => {
         </Pie>
       </PieChart>
     </ResponsiveContainer>
+    </>
   );
 
 }

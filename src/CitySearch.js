@@ -39,7 +39,7 @@ class CitySearch extends Component {
   render() {
     return (
       <>
-      <div className="CitySearch">In which city would you like to join?</div>
+      <div className="CitySearch text-muted">In which city would you like to join?</div>
       <input
           type="text"
           className="city mt-3"
