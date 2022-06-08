@@ -27,7 +27,7 @@ p {
 input[type="text"],
 input[type="number"] {
     padding: 8px 6px 8px 10px;
-    border-radius: 10px;
+    border-radius: 20px;
     outline: none;
     border: 1px solid #ccc;
     font-size: 14px;
@@ -43,22 +43,23 @@ input[type="number"] {
 .CitySearch {
     display: flex;
     flex-direction: column;
-    flex-basis: 300px;
-    max-width: 300px;
+    /* flex-basis: 300px; */
+    max-width: 400px;
     position: relative;
+    margin-top: 1.5rem;
 }
 
 .suggestions {
     position: relative;
-    z-index: 999;
-    margin: 10;
+    z-index: 2;
+    margin: 0;
     font-size: 14px;
 }
 
 .suggestions>li {
     text-align: left;
-    padding: 8px 6px 8px 10px;
-    background-color: rgba(22, 170, 255, 0.068);
+    padding: 8px 26px 8px 30px;
+    background-color: white;
     cursor: pointer;
 }
 
@@ -68,15 +69,7 @@ input[type="number"] {
 }
 
 .suggestions>li:hover {
-    background-color: #dfdfdf;
-}
-
-.event {
-    padding: 10px 10px 35px;
-    margin-bottom: 10px;
-    text-align: left;
-    border-radius: 4px;
-    position: relative;
+    background-color: #147ef613;
 }
 
 .name {
@@ -98,24 +91,12 @@ input[type="number"] {
     overflow-x: hidden;
 }
 
-.numberOfEvents {
-    width: 200px;
-    margin: 20px auto;
-    text-align: center;
-}
-
 .button-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 20px;
     padding: 20px;
     font-family: sans-serif;
-}
-
-.Alert {
-    position: relative;
-    padding: 0.5rem;
-    border-radius: 8px;
 }
 
 .data-vis-wrapper {

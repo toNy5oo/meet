@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { InputGroup, FormControl, Col } from 'react-bootstrap/'
 import { ErrorAlert } from './Alert';
 
 class NumberOfEvents extends Component {
@@ -13,7 +12,7 @@ class NumberOfEvents extends Component {
     if ((newValue > 33) || (newValue < 1)) {
       this.setState({
         numberOfEvents: newValue,
-        infoText: 'Please set a number between 1 and 32',
+        infoText: 'Please choose a number between 1 and 32',
       })
     } else {
       this.setState({
@@ -27,28 +26,17 @@ class NumberOfEvents extends Component {
   render() {
     return (
       <>
-      <Col>
-      {/* <div className="numberOfEvents">Events to show:</div> */}
-      <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Number of events to show</InputGroup.Text>
-        <FormControl
-          placeholder="Number between 1 and 32"
-          aria-label="Username"
-          aria-describedby="basic-addon1"
-          className="events_number__input" 
-            type="number" 
-            onChange={this.changeNumOfEvents}
-            value={this.state.numberOfEvents}
-        />
-      </InputGroup>
-      <ErrorAlert text={this.state.infoText} />
-      {/* <input 
-            className="events_number__input" 
+      {/* <Col> */}
+      <div className="numberOfEvents">How many events would you like to see?</div>
+      <input 
+            className="events_number__input my-3" 
             type="number" 
             onChange={this.changeNumOfEvents}
             value={this.state.numberOfEvents}>
-        </input> */}
-      </Col>
+        </input>
+      <ErrorAlert text={this.state.infoText} />
+      
+      {/* </Col> */}
       </>
     );
   }

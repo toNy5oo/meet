@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { InputGroup, FormControl, Col  } from 'react-bootstrap/'
 import { InfoAlert } from './Alert';
 
 class CitySearch extends Component {
   state = {
-    query: '',
+    query: 'Everywhere',
     suggestions: [],
     showSuggestions: false
   }
 
   handleInputChanged = (event) => {
+    console.log(this.state.suggestions)
+    console.log(this.props.locations)
     this.setState( { showSuggestions: true } );
       const suggestions = this.props.locations.filter((location) => {
       return location.toUpperCase().indexOf(event.target.value.toUpperCase()) > -1;
@@ -40,30 +41,14 @@ class CitySearch extends Component {
   render() {
     return (
       <>
-      <Col>
-      {/* <div className="CitySearch">Choose a city to see the events having place there:</div> */}
-      
-      <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Events that have place in</InputGroup.Text>
-        <FormControl
-          placeholder="Type the name of the city you are looking for"
-          aria-label="City"
-          aria-describedby="basic-input"
-          className="city" 
-                id="inputGroup-sizing-default"
-                value={this.state.query}
-                onChange={this.handleInputChanged}
-                onFocus={() => { this.setState({ showSuggestions: true }) }}
-        />
-      </InputGroup>
-      <InfoAlert text={this.state.infoText} />
-        {/* <input
+      <div className="CitySearch">In which city would you like to join?</div>
+      <input
           type="text"
-          className="city"
+          className="city mt-3"
           value={this.state.query}
           onChange={this.handleInputChanged}
           onFocus={() => { this.setState({ showSuggestions: true }) }}
-        /> */}
+        />
         <ul className="suggestions" style={this.state.showSuggestions ? {}: { display: 'none' }}>
             {
             this.state.suggestions.map((suggestion) => (
@@ -71,12 +56,12 @@ class CitySearch extends Component {
                 key={suggestion}
                 onClick={() => this.handleItemClicked(suggestion)}>{suggestion}</li>
             ))}
-            <li onClick={() => this.handleItemClicked("all")}>
+            <li onClick={() => this.handleItemClicked("Everywhere")}>
               <b>See all cities</b>
             </li>
         </ul>
-        </Col>
-        </>
+      <InfoAlert text={this.state.infoText} />
+      </>
     );
   }
 }
