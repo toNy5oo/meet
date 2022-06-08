@@ -9,8 +9,9 @@ import Header from './Header';
 import { OfflineAlert } from './Alert';
 import WelcomeScreen from './WelcomeScreen';
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
+import { EventGenre } from './EventGenre';
 import {
-    ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip
+    ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Sector, Cell
   } from 'recharts';
 
 class App extends Component {
@@ -23,32 +24,33 @@ class App extends Component {
         showWelcomeScreen: undefined
     };
     
-    async componentDidMount() {
-            this.mounted = true;
-            const accessToken = localStorage.getItem('access_token');
-            const isTokenValid = (await checkToken(accessToken)).error ? false : true;
-            const searchParams = new URLSearchParams(window.location.search);
-            const code = searchParams.get("code");
-            this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-                if ((code || isTokenValid) && this.mounted) {
-                        getEvents().then((events) => {
-                            if (this.mounted) {
-                            this.setState({ events, locations: extractLocations(events) });
-                        }
-                        });
-                }
+    // async componentDidMount() {
+    //         this.mounted = true;
+    //         const accessToken = localStorage.getItem('access_token');
+    //         const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    //         const searchParams = new URLSearchParams(window.location.search);
+    //         const code = searchParams.get("code");
+    //         this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    //             if ((code || isTokenValid) && this.mounted) {
+    //                     getEvents().then((events) => {
+    //                         if (this.mounted) {
+    //                         this.setState({ events, locations: extractLocations(events) });
+    //                     }
+    //                     });
+    //             }
                 
-            }
+    //         }
 
-    // componentDidMount() {
-    //     this.mounted = true;  
-    //             getEvents().then((events) => {
-    //                 this.setState({
-    //                     locations: extractLocations(events),
-    //                     events: events
-    //                 });
-    //             }); 
-    // }
+    componentDidMount() {
+        this.mounted = true;  
+                getEvents().then((events) => {
+                    this.setState({
+                        locations: extractLocations(events),
+                        events: events
+                    });
+                }); 
+                
+    }
         
     componentWillUnmount() {
         this.mounted = false;
@@ -64,7 +66,7 @@ class App extends Component {
         if (location === undefined) {
             location = this.state.locationSelected;
         }
-        console.log(eventCount, location)
+        // console.log(eventCount, location)
         getEvents().then((events) => {
             let locationEvents = location === "Everywhere" ?
                 events :
@@ -84,43 +86,50 @@ class App extends Component {
           const city = location.split(', ').shift()
           return {city, number};
         })
+        console.log(data);
         return data;
       };
 
+      
+
      render() {
-        if (this.state.showWelcomeScreen === undefined) return <div className="App" />
+        // if (this.state.showWelcomeScreen === undefined) return <div className="App" />
         
         return ( 
             <div className = "App">
             {!navigator.onLine && <OfflineAlert text={'You are currently offline, data may be not updated.'}/>}
             <Header / >
             <Container>
-            <Row className="d-flex justify-content-between p-3 m-3">
-                <Col className="d-flex flex-column align-items-center justify-content-center">
-                <NumberOfEvents updateEvents = { this.updateEvents } />
-                <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } />  
-                </Col>
-                <Col className="d-flex flex-column align-items-center justify-content-around">
-                    <ScatterChart
-                            width={800}
-                            height={400}
-                            margin={{
-                                top: 20, right: 20, bottom: 20, left: 20,
-                            }}
-                            >
-                            <CartesianGrid />
-                            <XAxis type="category" dataKey="city" name="City" />
-                            <YAxis type="number" dataKey="number" name="Events" allowDecimals={false} />
-                            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                            <Scatter data={this.getData()} fill="#8884d8" />
-                    </ScatterChart>
-                </Col>
-            </Row> 
-            <Row>
-            
-            </Row>
+                    <Row className="d-flex justify-content-center align-item-center p-3 m-3">
+                            <Col md={12} className="d-flex flex-column align-items-center justify-content-center p-5">
+                                    <NumberOfEvents updateEvents = { this.updateEvents } />
+                                    <CitySearch locations = { this.state.locations } updateEvents = { this.updateEvents } />  
+                            </Col>
+                            <Col md={6} className='data-vis-wrapper'>
+                                    <EventGenre events={this.state.events} />
+                            </Col>
+                            <Col  md={6} className="data-vis-wrapper d-flex flex-column align-items-center justify-content-around p-5">
+                                    <ResponsiveContainer height={200} >
+                                        <ScatterChart
+                                                margin={{
+                                                    top: 20, right: 20, bottom: 20, left: 20,
+                                                }}
+                                                >
+                                                <CartesianGrid />
+                                                <XAxis type="category" dataKey="city" name="City" />
+                                                <YAxis type="number" dataKey="number" name="Events" allowDecimals={false} />
+                                                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                                                <Scatter data={this.getData()} fill="rgba(255, 172, 5, 0.671)" />
+                                        </ScatterChart>
+                                    </ResponsiveContainer>
+                                    
+                            </Col>
+                    </Row> 
+                    <Row>
+                    
+                    </Row>
             <EventList events = { this.state.events } /> 
-            <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+            {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
             </Container > 
             </div>
         );
