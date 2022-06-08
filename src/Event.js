@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Card} from 'react-bootstrap'
 import { SiGooglemaps } from 'react-icons/si'
-import { GrStatusInfo } from 'react-icons/gr'
-import { AiOutlineClockCircle } from 'react-icons/ai'
+import { BsCalendar2Event } from 'react-icons/bs'
+import { AiOutlineInfoCircle } from 'react-icons/ai'
 
 class Event extends Component {
 
@@ -20,26 +20,10 @@ class Event extends Component {
   };
 
   parseDate(date){
-  //   const toParseDate = new Date(date).toLocaleDateString(
-  //     undefined,
-  //     {
-  //       year: 'numeric',
-  //       month: 'long',
-  //       day: 'numeric'
-  //     }
-  //   );
-  //  return toParseDate
   let eventDate = new Date(date);
-  let d = eventDate.toLocaleDateString(
-        undefined,
-        {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        }
-      );
-  let t = eventDate.getHours() + ":" + eventDate.getMinutes();
-  return d+' | '+t;
+  let d = eventDate.toLocaleDateString((undefined, { timeZone: 'UTC' }));
+  let t = eventDate.getHours() + ":" +('0'+eventDate.getMinutes()).slice(-2);
+  return d +' |  '+t;
 
   }
 
@@ -57,7 +41,6 @@ class Event extends Component {
           </Card.Header>
           
           <Card.Body>
-          
           {showDetails ? 
               (<div className='extra-details'>
                   <h6>About the event:</h6>
@@ -68,9 +51,18 @@ class Event extends Component {
                 </div>
               )
             : <>
-            <Card.Title className='start-date'><AiOutlineClockCircle/> {this.parseDate(event.start.dateTime)} ({event.start.timeZone})</Card.Title>
-            <Card.Text className='location'><GrStatusInfo /> {event.status} | <SiGooglemaps /> {event.location}</Card.Text></>}
-         
+            <div className='little_info d-flex flex-column justify-content-center align-items-center'>
+            <Card.Title className='start-date'>
+            <BsCalendar2Event  fill='rgb(124, 175, 196)'/>&nbsp;
+                   {this.parseDate(event.start.dateTime)} ({event.start.timeZone})
+            </Card.Title>
+            <Card.Text className='location d-flex flex-column align-items-center'> 
+                  <h6><AiOutlineInfoCircle fill='rgb(124, 175, 196)'/>&nbsp;{event.status}</h6>
+                  <h6><SiGooglemaps fill='rgb(124, 175, 196)'/>{event.location}</h6>
+            </Card.Text>
+            </div>
+            </>}
+        
       </Card.Body>
       </Card>
       </div>
